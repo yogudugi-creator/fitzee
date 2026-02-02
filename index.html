@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#102218" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Fitzee" />
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2964/2964514.png">
+    <link rel="manifest" href="public/manifest.json" />
+    <title>Fitzee - Fitness Tracker</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              colors: {
+                primary: '#13ec6d',
+                'primary-dark': '#0fbd56',
+                charcoal: '#1a1a1a',
+                'charcoal-light': '#2a2a2a',
+                'bg-light': '#f6f8f7',
+                'bg-dark': '#102218',
+              },
+              fontFamily: {
+                display: ['Lexend', 'sans-serif'],
+                sans: ['Lexend', 'sans-serif'],
+              },
+            },
+          },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            overscroll-behavior-y: contain;
+            background-color: #102218;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
+    "recharts": "https://esm.sh/recharts@^3.7.0"
+  }
+}
+</script>
+</head>
+<body class="bg-bg-light dark:bg-bg-dark text-charcoal dark:text-white transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          // Robust URL resolution: constructing the path relative to the current location origin 
+          // and pathname to avoid 'origin mismatch' errors caused by environment-injected <base> tags.
+          const base = window.location.pathname.split('/').slice(0, -1).join('/');
+          const swPath = (base.endsWith('/') ? base : base + '/') + 'service-worker.js';
+          
+          navigator.serviceWorker.register(swPath)
+            .then(reg => console.log('Fitzee Service Worker Ready'))
+            .catch(err => {
+              console.warn('Service Worker registration failed. This is common in preview environments:', err.message);
+            });
+        });
+      }
+    </script>
+</body>
+</html>
